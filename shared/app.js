@@ -1,4 +1,4 @@
-import {createGame,beginQuestion,submitAnswer,secondsLeft,standings,simulateRival,questions,objects,TOTAL} from './engine.js';
+import {createGame,beginQuestion,submitAnswer,secondsLeft,standings,simulateRival,questions,objects,TOTAL} from './engine.js?v=d31ac13d61f2';
 
 const theme = document.body.dataset.theme;
 const asset = '../shared/assets/';
