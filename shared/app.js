@@ -216,7 +216,7 @@ function roomView() {
   return `<main id="main" class="room-layout"><div class="page-heading"><div><span class="eyebrow">${t('gala')}</span><h1>${t('race')}</h1><p>${t('roomIntro')}</p></div><div class="room-code"><span>${t('sessionCode')}</span><strong>ATLAS</strong><small>${game.rivals.length+1} ${t('hunters')}</small></div></div><div class="room-grid">${leaderboard(true)}<aside>${activity()}<div class="room-mini-map">${mapView(true)}</div><p class="subtle-note">${t('simulation')}</p></aside></div></main>`;
 }
 function organizerView() {
-  return `<main id="main"><div class="page-heading"><div><span class="eyebrow">${t('organizer')}</span><h1>${t('control')}</h1><p>${t('controlIntro')}</p></div><span class="status-pill">${icon(game.paused?'pause':'play')}${t(game.paused?'paused':'active')}</span></div><div class="organizer-grid"><section class="panel quiz-editor"><div class="section-title"><h2>${t('quiz')}</h2><span>10 ${t('steps')}</span></div><ol>${questions.map((q,i)=>`<li><span class="editor-number">${String(i+1).padStart(2,'0')}</span><div><strong>${local(q.title)}</strong><p>${local(q.text)}</p><small>100 ${t('points')} · 20 s</small></div><button type="button" class="icon-button" data-edit="${i}" aria-label="${t('edit')} : ${title(i)}">${icon('edit')}</button></li>`).join('')}</ol></section><aside class="control-sidebar"><section class="panel"><span class="eyebrow">${t('session')}</span><h2>ATLAS</h2>${metrics()}${action(t(game.paused?'resume':'pause'),'pause',game.paused?'play':'pause','secondary')}${action(t('reset'),'reset','target','text-button')}</section><section class="panel"><h2>${t('hunters')}</h2><ul class="participant-list">${game.rivals.map((p,i)=>`<li><div><strong>${escape(p.name)}</strong><small>ID DEMO-00${i+2} · ${p.score} ${t('points')}</small></div><button class="icon-button" type="button" data-remove="${i}" aria-label="${t('deletePlayer')} : ${escape(p.name)}">${icon('trash')}</button></li>`).join('') || `<li>${t('empty')}</li>`}</ul>${action(t('export'),'export','arrow','secondary')}</section><section class="panel"><h2>${t('invitation')}</h2><p>${t('invitationText')}</p>${action(t('copyLink'),'copy','link','secondary')}</section></aside></div></main>`;
+  return `<main id="main"><div class="page-heading"><div><span class="eyebrow">${t('organizer')}</span><h1>${t('control')}</h1><p>${t('controlIntro')}</p></div><span class="status-pill">${icon(game.paused?'pause':'play')}${t(game.paused?'paused':'active')}</span></div><div class="organizer-grid"><section class="panel quiz-editor"><div class="section-title"><h2>${t('quiz')}</h2><span>10 ${t('steps')}</span></div><ol>${questions.map((q,i)=>`<li><span class="editor-number">${String(i+1).padStart(2,'0')}</span><div><strong>${local(q.title)}</strong><p>${local(q.text)}</p><small>100 ${t('points')} · 20 s</small></div><button type="button" class="icon-button" data-edit="${i}" aria-label="${t('edit')} : ${title(i)}">${icon('edit')}</button></li>`).join('')}</ol></section><aside class="control-sidebar"><section class="panel"><span class="eyebrow">${t('session')}</span><h2>ATLAS</h2>${metrics()}${action(t(game.paused?'resume':'pause'),'pause',game.paused?'play':'pause','secondary')}${action(t('reset'),'reset','target','text-button')}</section><section class="panel"><h2>${t('hunters')}</h2><ul class="participant-list">${game.rivals.map((p,i)=>`<li><div><strong>${escape(p.name)}</strong><small>ID ${escape(p.id)} · ${p.score} ${t('points')}</small></div><button class="icon-button" type="button" data-remove="${i}" aria-label="${t('deletePlayer')} : ${escape(p.name)}">${icon('trash')}</button></li>`).join('') || `<li>${t('empty')}</li>`}</ul>${action(t('export'),'export','arrow','secondary')}</section><section class="panel"><h2>${t('invitation')}</h2><p>${t('invitationText')}</p>${action(t('copyLink'),'copy','link','secondary')}</section></aside></div></main>`;
 }
 function resultView() {
   const winner = standings(game)[0];
@@ -224,6 +224,11 @@ function resultView() {
   return `<main id="main" class="result-layout"><section class="result-card"><span class="eyebrow">${t('trophy')}</span><img class="victory-chest" src="${asset}event-chest.png" width="420" height="356" alt=""><h1>${won?t('bravo'):t('result')}${won?', '+escape(game.name)+' !':''}</h1><p>${t(won?'won':'resultText')}</p><div class="result-metrics"><div><strong>${game.score}</strong><span>${t('points')}</span></div><div><strong>10/10</strong><span>${t('found')}</span></div><div><strong>${rankOf()}</strong><span>${t('finalRank')}</span></div></div>${action(t('seeRank'),'room','trophy')}${action(t('again'),'join','compass','secondary')}</section></main>`;
 }
 function render({focus=false}={}) {
+  // Keep keyboard position when only the simulated standings refresh.
+  const active=document.activeElement;
+  const focusedKey=root.contains(active)?['action','view','stage','answer','edit','remove'].find(key=>active.dataset[key]!==undefined):null;
+  const focusedValue=focusedKey?active.dataset[focusedKey]:null;
+  const mapFocused=root.contains(active)&&active.classList.contains('map-viewport');
   document.documentElement.lang = lang;
   document.querySelector('.skip-link').textContent = lang==='fr'?'Aller au contenu':'Skip to content';
   document.title = `${t(theme)} · ${t('app')} · ${t('demo')}`;
@@ -233,6 +238,8 @@ function render({focus=false}={}) {
   bindMap();
   updateTimer();
   if(focus) {const heading = root.querySelector('main h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
+  else if(focusedKey){const replacement=[...root.querySelectorAll('button')].find(button=>button.dataset[focusedKey]===focusedValue);replacement?.focus({preventScroll:true});}
+  else if(mapFocused)root.querySelector('.map-viewport')?.focus({preventScroll:true});
 }
 
 function updateTimer() {

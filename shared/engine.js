@@ -28,10 +28,10 @@ export function createGame(name = 'Camille', preview = true) {
     name, done: preview ? 3 : 0, score: preview ? 300 : 0,
     attempts: 0, deadline: null, phase: 'map', paused: false,
     rivals: [
-      { name: 'Sarah', done: preview ? 5 : 0, score: preview ? 500 : 0 },
-      { name: 'Alex', done: preview ? 4 : 0, score: preview ? 375 : 0 },
-      { name: 'Léa', done: preview ? 2 : 0, score: preview ? 200 : 0 },
-      { name: 'Noah', done: preview ? 1 : 0, score: preview ? 100 : 0 }
+      { id:'DEMO-002', name: 'Sarah', done: preview ? 5 : 0, score: preview ? 500 : 0 },
+      { id:'DEMO-003', name: 'Alex', done: preview ? 4 : 0, score: preview ? 375 : 0 },
+      { id:'DEMO-004', name: 'Léa', done: preview ? 2 : 0, score: preview ? 200 : 0 },
+      { id:'DEMO-005', name: 'Noah', done: preview ? 1 : 0, score: preview ? 100 : 0 }
     ], events: [], tick: 0, preview
   };
 }
