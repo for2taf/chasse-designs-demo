@@ -62,3 +62,48 @@ body[data-theme=mission] .mission-broadcast-grid{grid-template-columns:minmax(0,
 @media(max-width:1024px){body[data-theme] .expedition-broadcast-grid{grid-template-columns:1.5fr 1fr}.broadcast-feed{grid-column:1/-1;grid-template-columns:1fr 1fr}.broadcast-feed .qr-block{flex-direction:row}.atlas-broadcast-journal{display:grid!important;grid-template-columns:1fr!important}.mission-podium{grid-column:1/-1}.mission-broadcast-feed{display:grid!important;grid-template-columns:1fr!important}.control-operator{grid-template-columns:1fr 1fr}.control-operator>.activity{grid-column:1/-1}.room-grid .room-leaderboard .rank-person>strong{font-size:24px}.mission-podium .podium-place strong{font-size:20px}.atlas-command-messages .qr-block{flex-direction:row}.mission-players{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){body[data-theme] .atlas-command-grid,body[data-theme] .expedition-control-grid,body[data-theme] .mission-studio-grid,body[data-theme] .atlas-broadcast-grid,body[data-theme] .expedition-broadcast-grid,body[data-theme] .mission-broadcast-grid{grid-template-columns:1fr}.atlas-command-rail .command-controls{display:block}.atlas-command-rail .command-controls .button{width:100%;margin-top:12px}.atlas-command-rail .command-code{margin:16px 0}.atlas-command-messages .qr-block{flex-direction:row}.control-operator{grid-template-columns:1fr}.control-operator .qr-block{flex-direction:row}.control-radar .map-viewport{height:320px}.mission-players{grid-template-columns:1fr}.studio-step{margin-top:16px}.broadcast-radar .map-viewport{height:280px}.broadcast-feed{grid-template-columns:1fr}.podium-line{gap:8px;align-items:stretch}.podium-place{padding:12px 8px;width:33.333%;border-radius:12px}.podium-place.place-1{padding:12px 8px}.mission-podium .podium-place strong{font-size:13px}.podium-place>span:not(.podium-medal):not(.podium-number){font-size:13px}.podium-place>small{font-size:9px}.podium-number{top:8px;right:8px;font-size:9px}.podium-medal{width:36px;height:36px}.room-grid .room-leaderboard .rank-person>strong{font-size:20px}.atlas-chapter h2{font-size:24px}}
 @media(min-width:1025px) and (max-height:850px){.is-room .mission-podium{padding-bottom:12px}.is-room .podium-line{margin-top:8px}.is-room .podium-place{padding:8px 16px;gap:4px}.is-room .podium-medal{display:none}.is-room .podium-place strong{font-size:18px}.is-room .mission-broadcast-grid .room-leaderboard .rank-row{min-height:48px;padding-block:6px;margin-top:8px}.is-room .mission-broadcast-grid .room-leaderboard .rank-person>strong{font-size:18px}.is-room .mission-broadcast-grid .room-leaderboard .rank-number{font-size:24px}.is-room .mission-broadcast-grid .room-leaderboard .rank-score{font-size:24px}.is-room .mission-broadcast-grid .room-leaderboard .avatar{display:none}.is-room .atlas-broadcast-journal .room-mini-map{display:none}.is-room .atlas-chapter{padding-bottom:8px}.is-room .atlas-chapter>span{font-size:28px}.is-room .broadcast-radar .map-viewport{height:360px}}
+/* A short projector viewport keeps the race and invitation together. */
+@media (min-width: 1025px) and (max-height: 850px) {
+  body.is-room .demo-toolbar { min-height: 44px; height: 44px; padding-block: 0; }
+  body.is-room .language { min-height: 44px; height: 44px; }
+  body.is-room .app-header { padding-block: 4px; }
+  body.is-room main { padding-top: 12px; padding-bottom: 16px; }
+  body.is-room .page-heading { min-height: 44px; margin-bottom: 12px; }
+  body.is-room .page-heading h1 { font-size: 28px; }
+  body.is-room .room-code { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; padding: 8px 16px; }
+  body.is-room .room-code strong { margin: 0; font-size: 24px; }
+  body.is-room .room-grid { align-items: start; }
+  body.is-room .room-leaderboard { padding: 16px; }
+  body.is-room .room-leaderboard .section-title { margin-bottom: 8px; }
+  body.is-room .room-leaderboard .section-title h2 { font-size: 22px; }
+  body.is-room .room-leaderboard .rank-row { min-height: 52px; padding-block: 4px; margin-top: 0; }
+  body.is-room .room-leaderboard .rank-person > strong { font-size: 18px; line-height: 1.25; }
+  body.is-room .room-leaderboard .rank-person > small { font-size: 10px; line-height: 1.2; }
+  body.is-room .room-leaderboard .rank-track { height: 3px; margin-top: 4px; }
+  body.is-room .room-leaderboard .avatar { display: none; }
+  body.is-room .room-leaderboard .rank-number { font-size: 24px; }
+  body.is-room .room-leaderboard .rank-score { font-size: 24px; line-height: 1.15; }
+  body.is-room .room-leaderboard .rank-score small { font-size: 10px; line-height: 1.2; }
+  body.is-room .broadcast-radar .map-viewport { height: 304px; }
+  body.is-room .broadcast-feed, body.is-room .atlas-broadcast-journal, body.is-room .mission-broadcast-feed { gap: 12px; }
+  body.is-room .room-grid .activity { min-height: 0; padding: 16px; }
+  body.is-room .activity .section-title { margin-bottom: 12px; }
+  body.is-room .activity h2 { font-size: 22px; }
+  body.is-room .activity strong { font-size: 12px; line-height: 1.35; }
+  body.is-room .activity small { font-size: 10px; line-height: 1.3; }
+  body.is-room .room-grid .qr-block { flex-direction: row; align-items: center; text-align: left; gap: 12px; }
+  body.is-room .room-grid .qr-block strong { font-size: 20px; letter-spacing: 2px; }
+  body.is-room .room-grid .qr-block p { font-size: 11px; }
+  body.is-room .room-grid .panel:has(#join-qr) { padding: 16px; }
+  body.is-room .winner-live { display: grid; grid-template-columns: 64px 1fr; gap: 4px 12px; align-items: center; padding: 12px; text-align: left; }
+  body.is-room .winner-live img { grid-row: 1 / 4; width: 64px; margin: 0; }
+  body.is-room .winner-live h2 { font-size: 24px; }
+  body.is-room .winner-live p { margin: 0; font-size: 12px; }
+  body.is-room[data-theme=mission] .mission-broadcast-grid { grid-template-columns: 224px minmax(0, 1fr) 304px; }
+  body.is-room .mission-podium { grid-column: auto; padding: 0; border: 0; }
+  body.is-room .podium-line { display: grid; gap: 12px; margin-top: 12px; }
+  body.is-room .podium-place, body.is-room .podium-place.place-1 { width: 100%; padding: 12px 16px; order: initial; }
+  body.is-room .atlas-chapter { display: none; }
+}
+/* The operator keeps each player's score next to their identifier. */
+.control-central .participant-list > li > span:not(.avatar) { display: block; font-size: 12px; white-space: nowrap; }
