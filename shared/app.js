@@ -243,7 +243,7 @@ function render({focus=false}={}) {
 }
 
 function updateTimer() {
-  const remaining = secondsLeft(game,game.paused && pauseStarted!==null ? pauseStarted : Date.now());
+  const remaining = feedback?.kind==='timeout' && game.phase==='retry' ? 0 : secondsLeft(game,game.paused && pauseStarted!==null ? pauseStarted : Date.now());
   root.querySelectorAll('[data-seconds]').forEach(el=>{el.textContent=remaining;});
   root.querySelectorAll('.timer-track').forEach(el=>{el.style.strokeDashoffset = 220*(1-remaining/20);});
   if(game.phase==='question' && !game.paused && remaining===0) {feedback = submitAnswer(game, null);render();announce(t('timeout'));}
