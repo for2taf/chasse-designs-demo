@@ -1,7 +1,9 @@
 import {createGame,beginQuestion,submitAnswer,secondsLeft,standings,simulateRival,questions,objects,TOTAL} from './engine.js?v=d31ac13d61f2';
 
 const theme = document.body.dataset.theme;
-const asset = '../shared/assets/';
+const standalone = document.body.dataset.standalone === 'true';
+// Resolve assets from this module so a demo works at / or a GitHub Pages subpath.
+const asset = new URL('./assets/', import.meta.url).href;
 const copy = {
   fr: {
     app:'Chasse au trésor', gala:'CCIMN · Gala Reconnaissance 2026', demo:'Démo interactive',
@@ -147,7 +149,10 @@ function announce(text) {notice.textContent = ''; requestAnimationFrame(() => {n
 function addEvent(name, step, finish=false) {game.events.unshift({name,step,finish});game.events = game.events.slice(0,5);}
 
 function header() {
-  return `<div class="demo-toolbar"><a href="../">${icon('arrow')} ${t('compare')}</a><span>${t(theme)} <span class="demo-pill">${t('demo')}</span></span><button class="language" type="button" data-action="language" aria-label="${lang === 'fr' ? 'Switch the entire demo to English':'Passer toute la démo en français'}">${lang === 'fr' ? 'EN':'FR'}</button></div>
+  const comparison = standalone
+    ? `<span>${icon('compass')} ${t('demo')}</span>`
+    : `<a href="../">${icon('arrow')} ${t('compare')}</a>`;
+  return `<div class="demo-toolbar">${comparison}<span>${t(theme)} ${standalone ? '' : `<span class="demo-pill">${t('demo')}</span>`}</span><button class="language" type="button" data-action="language" aria-label="${lang === 'fr' ? 'Switch the entire demo to English':'Passer toute la démo en français'}">${lang === 'fr' ? 'EN':'FR'}</button></div>
     <header class="app-header"><a class="brand" href="./"><img src="${asset}treasure-logo.svg" alt="" width="44" height="44"><span><strong>${t('app')}</strong><small>${t('gala')}</small></span></a><nav aria-label="${lang==='fr'?'Vues de la démo':'Demo views'}">${['player','organizer','room'].map(item => `<button type="button" data-view="${item}" aria-current="${view===item?'page':'false'}">${t(item)}</button>`).join('')}</nav><button class="icon-button help" type="button" data-action="help" aria-label="${t('help')}">?</button></header>`;
 }
 
